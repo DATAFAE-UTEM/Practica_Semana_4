@@ -28,6 +28,8 @@ print(rows)
 print(cols)
 
 # Considerar Alinear elementos dentro de 'data['']' según definición de headers
+# PERMITE EXTRAER HASTA ZAMBIA, LUEGO EL MODELO SE QUIEBRA POR ESTRUCTURA DE TABLA PRESENTE AL FINAL.
+
 for r in range(2, rows + 1):
     data['Country'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[1]").text

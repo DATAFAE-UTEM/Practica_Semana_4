@@ -28,7 +28,7 @@ def link(url):
     df.to_csv('RiskPrem_OtherMkts_links')
 
 
-link('')
+link('http://pages.stern.nyu.edu/~adamodar/')
 
 #Extracción de documentos
 
