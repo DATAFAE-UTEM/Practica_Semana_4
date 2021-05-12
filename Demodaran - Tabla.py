@@ -17,7 +17,7 @@ url = 'http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html
 driver.get(url)
 print(driver.title)
 
-data = {}
+data1 = {}
 df1 = pd.DataFrame(
     columns=['Country', 'Continent', 'Moody´s Rating', 'Rating-based Default Spread', 'Total Equity Risk Premium',
              'Country Risk Premium'])  # Nombres de los header de tabla
@@ -30,19 +30,41 @@ print(cols)
 # Considerar Alinear elementos dentro de 'data['']' según definición de headers
 # PERMITE EXTRAER HASTA ZAMBIA, LUEGO EL MODELO SE QUIEBRA POR ESTRUCTURA DE TABLA PRESENTE AL FINAL.
 
+# Tabla 1
+
 for r in range(2, rows + 1):
-    data['Country'] = driver.find_element_by_xpath(
+    data1['Country'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[1]").text
-    data['Continent'] = driver.find_element_by_xpath(
+    data1['Continent'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[2]").text
-    data['Moody´s Rating'] = driver.find_element_by_xpath(
+    data1['Moody´s Rating'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[3]").text
-    data['Rating-based Default Spread'] = driver.find_element_by_xpath(
+    data1['Rating-based Default Spread'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[4]").text
-    data['Total Equity Risk Premium'] = driver.find_element_by_xpath(
+    data1['Total Equity Risk Premium'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[5]").text
-    data['Country Risk Premium'] = driver.find_element_by_xpath(
+    data1['Country Risk Premium'] = driver.find_element_by_xpath(
         "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[6]").text
-    df1 = df1.append(data, ignore_index=True)
+    df1 = df1.append(data1, ignore_index=True)
     print(df1)
-    df1.to_csv('Risk Premiums for Other Markets - data')
+    df1.to_csv('Risk Premiums for Other Markets - data 1')
+
+# Tabla 2
+
+data2 = {}
+df2 = pd.DataFrame(columns=['Country', 'PRS Composite Risk Score', 'ERP', 'CRP', 'Default Spread'])
+
+for r in range(160, rows + 1):
+    data2['Country'] = driver.find_element_by_xpath(
+        "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[1]").text
+    data2['PRS Composite Risk Score'] = driver.find_element_by_xpath(
+        "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[2]").text
+    data2['ERP'] = driver.find_element_by_xpath(
+        "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[3]").text
+    data2['CRP'] = driver.find_element_by_xpath(
+        "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[4]").text
+    data2['Default Spread'] = driver.find_element_by_xpath(
+        "/html/body/div/div/div/div/table/tbody/tr[" + str(r) + "]/td[5]").text
+    df2 = df2.append(data2, ignore_index=True)
+    print(df2)
+    df2.to_csv('Frontier Markets (no sovereign ratings) - data')
