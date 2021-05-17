@@ -96,9 +96,9 @@ class lectura:
 
 if __name__ == '__main__':
 
-    os.chdir('C:\\Users\\marti\\OneDrive\\Desktop\\Datas\\PDf - modelo test\\test')
+    os.chdir('C:\\Users\\marti\\OneDrive\\Desktop\\Datas\\PDf - modelo test')
 
     for file in os.listdir():
         lee = lectura()
         lee.pdf(file)
-        
+    print(lee)
